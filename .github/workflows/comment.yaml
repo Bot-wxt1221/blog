@@ -1,6 +1,6 @@
 name: Generate comments
 
-on: [workflow_dispatch]
+on: [workflow_dispatch,push]
 
 permissions:
   write-all
