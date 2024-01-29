@@ -1,6 +1,9 @@
 name: Generate comments
 
-on: [workflow_dispatch,push]
+on: 
+  workflow_dispatch: 
+  repository_dispatch: 
+    types: [comments]
 
 permissions:
   write-all
