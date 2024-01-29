@@ -7,7 +7,6 @@ permissions:
 
 jobs:
   comment:
-    needs: deploy
     permissions:
       write-all
     environment:
