@@ -1,0 +1,30 @@
+name: Generate comments
+
+on: [workflow_dispatch]
+
+permissions:
+  write-all
+
+jobs:
+  comment:
+    needs: deploy
+    permissions:
+      write-all
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+      - name: Checkout
+        run: |
+          git clone --depth 1 https://github.com/Bot-wxt1221/Bot-wxt1221.github.io.git website
+      - name: Generate comments
+        working-directory: website
+        run: |
+          npx hexo generate
+          node -v
+          node auto-generate-issue.js ${{ secrets.GITHUB_TOKEN }}
